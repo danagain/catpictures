@@ -3,9 +3,8 @@ python:
   - "3.5"
 
 install:
-  - "/bin/bash -c pwd"
-  - "/bin/bash -c ls"
-  - "pip install -r /Python/requirements.txt"
+  - "/bin/bash -c ls ./Python"
+  - "pip install -r ./Python/requirements.txt"
 
 script:
   - pylint /python/main.py
