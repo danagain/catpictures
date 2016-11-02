@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 SPI_SETDESKTOPWALLPAPER = 20
 
 def getURL():
-"""Gets a Random URL from the Octodex"""
+    """Gets a Random URL from the Octodex"""
     try:
         request = requests.get('https://octodex.github.com/', stream=True)
         if request.status_code == 200:
@@ -32,7 +32,7 @@ def getURL():
 
 
 def download_Img(completeUrl):
-"""Downloads the Image from the passed in URL"""
+    """Downloads the Image from the passed in URL"""
     try:
         req = requests.get(completeUrl, stream=True)
         if req.status_code == 200:
