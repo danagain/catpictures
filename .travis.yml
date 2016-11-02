@@ -6,4 +6,4 @@ install:
   - "pip install -r ./Python/requirements.txt"
 
 script:
-  - pylint ./python/main.py
+  - pylint ./Python/main.py

@@ -44,7 +44,7 @@ def downloadImg(urlArray):
 
 
 def setWallpaper(Path):
-    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 3)
+    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 0)
 
 def main():
     Urls = getAllUrls()
