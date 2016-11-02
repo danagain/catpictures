@@ -1,36 +1,39 @@
-import requests
-from bs4 import BeautifulSoup
-from random import randint
+"""Downloads a Random Github Octocat Picture and Sets it as Desktop Wallpaper"""
 import shutil
 import re
 import ctypes
 import os
-SPI_SETDESKTOPWALLPAPER=20
+from random import randint
+import requests
+from bs4 import BeautifulSoup
 
-def getAllUrls():
 
+SPI_SETDESKTOPWALLPAPER = 20
+
+def getURL():
+"""Gets a Random URL from the Octodex"""
     try:
         request = requests.get('https://octodex.github.com/', stream=True)
         if request.status_code == 200:
-           regex = r'(?<=data-src=")/images/.*(?=" height="424" width="424)'
-           soup = BeautifulSoup(request.text, "html.parser")
-           text = soup.find_all('a')
-           urlArray = []
+            regex = r'(?<=data-src=")/images/.*(?=" height="424" width="424)'
+            soup = BeautifulSoup(request.text, "html.parser")
+            text = soup.find_all('a')
+            urlArray = []
 
-           for value in text:
-               result = re.search(regex, str(value))
-               if result != None:
-                   urlArray.append(result.group(0))
-           return urlArray
+            for value in text:
+                result = re.search(regex, str(value))
+                if result != None:
+                    urlArray.append(result.group(0))
+            index = randint(0, len(urlArray))
+            completeUrl = 'https://octodex.github.com{0}'.format(urlArray[index])
+            return completeUrl
     except Exception as e:
         print(e)
 
 
-def downloadImg(urlArray):
-
-    index = randint(0,len(urlArray))
+def download_Img(completeUrl):
+"""Downloads the Image from the passed in URL"""
     try:
-        completeUrl = 'https://octodex.github.com{0}'.format(urlArray[index])
         req = requests.get(completeUrl, stream=True)
         if req.status_code == 200:
 
@@ -39,17 +42,18 @@ def downloadImg(urlArray):
                 shutil.copyfileobj(req.raw, f)
                 picturePath = '{0}/output.png'.format(os.getcwd())
                 return picturePath
-    except Exception as e:
-        print(e)
+    except Exception as err:
+        print(err)
 
 
-def setWallpaper(Path):
+def set_Wallpaper(Path):
+    """Sets the Wallpaper (Windows) with the newly downloaded Image."""
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 0)
 
 def main():
-    Urls = getAllUrls()
-    picturePath = downloadImg(Urls)
-    setWallpaper(picturePath)
+    Urls = getURL()
+    picturePath = download_Img(Urls)
+    set_Wallpaper(picturePath)
 
 
 if __name__ == '__main__':
