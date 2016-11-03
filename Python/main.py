@@ -26,6 +26,7 @@ def getURL():
                     urlArray.append(result.group(0))
             index = randint(0, len(urlArray))
             completeUrl = 'https://octodex.github.com{0}'.format(urlArray[index])
+            print("Will download image at {0}".format(completeUrl))
             return completeUrl
     except Exception as e:
         print(e)
@@ -39,8 +40,9 @@ def download_Img(completeUrl):
 
             with open("output.png", 'wb') as f:
                 req.raw.decode_content = True
+                print("Downloading Image")
                 shutil.copyfileobj(req.raw, f)
-                picturePath = '{0}/output.png'.format(os.getcwd())
+                picturePath = '{0}\output.png'.format(os.getcwd())
                 return picturePath
     except Exception as err:
         print(err)
@@ -48,12 +50,14 @@ def download_Img(completeUrl):
 
 def set_Wallpaper(Path):
     """Sets the Wallpaper (Windows) with the newly downloaded Image."""
+    print("Setting Wallpaper with {0}".format(Path))
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 0)
 
 def main():
     Urls = getURL()
     picturePath = download_Img(Urls)
     set_Wallpaper(picturePath)
+    print("Complete")
 
 
 if __name__ == '__main__':
