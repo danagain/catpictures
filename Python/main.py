@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 SPI_SETDESKTOPWALLPAPER = 20
 
 def GETURL():
-"""Gets a Random URL from the Octodex"""
+    """Gets a Random URL from the Octodex"""
 
     request = requests.get('https://octodex.github.com/', stream=True)
     if request.status_code == 200:
@@ -33,7 +33,7 @@ def GETURL():
 
 def DOWNLOAD_IMG(completeUrl):
     """Downloads the Image from the passed in URL"""
-    
+
     req = requests.get(completeUrl, stream=True)
     if req.status_code == 200:
 
@@ -48,11 +48,13 @@ def DOWNLOAD_IMG(completeUrl):
 
 def SET_WALLPAPER(picturePath):
     """Sets the Wallpaper (Windows) with the newly downloaded Image."""
+
     print("Setting Wallpaper with {0}".format(picturePath))
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 0)
 
 def main():
     """Execute the main function"""
+    
     Urls = getURL()
     picturePath = download_Img(Urls)
     set_Wallpaper(picturePath)
