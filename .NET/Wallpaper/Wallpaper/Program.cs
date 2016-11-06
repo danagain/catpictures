@@ -26,7 +26,6 @@ namespace Wallpaper1
         {
             Tile, Center, Stretch, Fit, Fill
         }
-
         /// <summary>
         /// Sets a given image file into desired layout and then updates the system
         /// with the systemParametersInfo call
@@ -62,7 +61,6 @@ namespace Wallpaper1
             key.Close();
             SystemParametersInfo(SET_DESKTOP_BACKGROUND, 0, directroy, UPDATE_INI_FILE | SEND_WINDOWS_INI_CHANGE);
         }
-
         /// <summary>
         /// Creates a directory in MyPictures called Wallpapers
         /// </summary>
@@ -75,7 +73,6 @@ namespace Wallpaper1
                 Directory.CreateDirectory(dir);
             }
         }
-
         /// <summary>
         /// Uses RegEx and RNG to grab a random image from
         /// http://octodex.github.com
@@ -87,7 +84,6 @@ namespace Wallpaper1
             List<string> urls = new List<string>();
             using (WebClient client = new WebClient())
             {
-                // client.DownloadFile("https://octodex.github.com/", @"C:\localfile.html");
                 string htmlCode = client.DownloadString("https://octodex.github.com/");
                 foreach (Match match in Regex.Matches(htmlCode, @"/images/(.*).jpg"))
                 {
@@ -99,7 +95,6 @@ namespace Wallpaper1
             randomNumber = randomNumber - rnd.Next(0, randomNumber);
             return urls[randomNumber];
         }
-
         /// <summary>
         /// Downloads the image from the random URL, stores it and then calls the setBack method
         /// to impliment wallpaper change
@@ -116,19 +111,20 @@ namespace Wallpaper1
             {
                 fileCount++;
                 directory = Path.Combine(dir, string.Format("Background{0}.jpg", fileCount));
-            }
-            
+            }           
             //Open a webClient, download file to the created directory, assign file name
             Uri baseUri = new Uri("http://octodex.github.com/images/");
             Uri myUri = new Uri(baseUri, randomURL);
-            string myUriStr = myUri.ToString();
             using (WebClient client = new WebClient())
             {
                 client.DownloadFile(myUri, directory);
             }
             setImage(directory, PicturePosition.Fill);
         }
-
+        /// <summary>
+        /// Main function, performs the method calls
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             createDirectory();
@@ -136,6 +132,4 @@ namespace Wallpaper1
             setWallpaper(rURL);
         }
     }
-
-
 }
