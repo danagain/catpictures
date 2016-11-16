@@ -54,10 +54,10 @@ def SET_WALLPAPER(picturePath):
 
 def main():
     """Execute the main function"""
-    
-    Urls = getURL()
-    picturePath = download_Img(Urls)
-    set_Wallpaper(picturePath)
+
+    Urls = GETURL()
+    picturePath = DOWNLOAD_IMG(Urls)
+    SET_WALLPAPER(picturePath)
     print("Complete")
 
 
