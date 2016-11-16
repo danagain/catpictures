@@ -50,7 +50,7 @@ def SET_WALLPAPER(picturePath):
     """Sets the Wallpaper (Windows) with the newly downloaded Image."""
 
     print("Setting Wallpaper with {0}".format(picturePath))
-    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, Path, 0)
+    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKTOPWALLPAPER, 0, picturePath, 0)
 
 def main():
     """Execute the main function"""
