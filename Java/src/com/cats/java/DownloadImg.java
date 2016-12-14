@@ -9,11 +9,10 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 
-public class DownloadImg {
+public class DownloadImg extends Url {
 
     public String WriteImage(){
-        Url link = new Url();
-        String url = link.fetchUrl();
+        String url = fetchUrl();
         String dest = "";
         System.out.println("Image taken from : " + url);
         try(InputStream in = new URL(url).openStream()){
