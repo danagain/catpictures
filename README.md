@@ -15,6 +15,9 @@ This will produce `wallpaper.exe` which can be executed from the command line.
 Navigate to `wallpaper` in the the .NET folder and run `csc Program.cs`. This will
 produce a Program.exe which can be executed from the command line.
 
+#### NodeJS
+From the root of the NodeJS folder simply run `npm install` once complete you can run `npm start` to execute the program.
+
 ## Why?
 
 The purpose is the create the same end result from multiple different languages in order to:
